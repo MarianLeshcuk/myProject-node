@@ -14,16 +14,16 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const item =new Item({
-        _id: mongoose.Types.ObjectId()
-        // title: req.body.title,
-        // description: req.body.description,
-        // price: req.body.price,
-        // imageSrc: req.body.imageUrl
+        _id: mongoose.Types.ObjectId(),
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        imageSrc: req.body.imageUrl
     }, {versionKey: false});
-    console.log(req);
 
+    console.log(req.body)
     item.save().then( data => {
-        res.status(200).json(req);
+        res.status(200).json(data);
     }).catch(err => {
         res.status(500).json({"error": err});
     })

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Item = require("./api/models/item");
 const itemRoutes = require("./api/routes/itemRoutes");
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.all((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use("/item", itemRoutes);
 
 module.exports = app;
