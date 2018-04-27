@@ -1,6 +1,6 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const item = require("./api/models/item");
+const express = require("express");
+const mongoose = require("mongoose");
+const Item = require("./api/models/item");
 const itemRoutes = require("./api/routes/itemRoutes");
 
 const app = express();
@@ -14,13 +14,13 @@ db.on("error", function() {
 
 db.on("open", function() {
     console.log("connected");
-});
+})
 
 app.all((req, res, next) => {
-    res.header("Access-Control_Allow-Origin", "*");
-    res.header("Access-Controll-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Acces-Control-Allow-Headers", "*");
     if(req.method === "OPTION") {
-        res.header("Access-A;llow-Methods", "POST", "GET", "DELETE");
+        res.header("Access-Control-Allow-Methods", "POST", "GET", "DELETE");
     };
     next();
 });

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const express = require('express');
+const mongoose = require("mongoose");
+const express = require("express");
 const router = express.Router();
 
 const Item = require("../models/item")
@@ -13,20 +13,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    const item = new Item({
-        _id: mongoose.Types.ObjectId(),
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        imageSrc: req.body.imageSrc
+    const item =new Item({
+        _id: mongoose.Types.ObjectId()
+        // title: req.body.title,
+        // description: req.body.description,
+        // price: req.body.price,
+        // imageSrc: req.body.imageUrl
     }, {versionKey: false});
+    console.log(req);
 
     item.save().then( data => {
-        res.status(200).json(data);
+        res.status(200).json(req);
     }).catch(err => {
         res.status(500).json({"error": err});
     })
-});
+})
 
 router.get("/:itemId", (req, res) => {
     const id = req.params.itemId;
@@ -34,6 +35,8 @@ router.get("/:itemId", (req, res) => {
     Item.findOne({"_id": id}).then( data => {
         res.status(200).json(data);
     }).catch(error => {
-        res.status(500).json({"error": err});
+        res.status(500).json({"error": error})
     });
-});module.exports = router;
+})
+
+module.exports = router;
